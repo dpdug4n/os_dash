@@ -20,4 +20,6 @@ Create two new user variables named ``abuseipdb_key`` and ``greynoise_key`` with
 * ``python index.py``
 * Navigate [here](http://127.0.0.1:8050/home) in your preferred browser.
 
+# Demo
+![Demo](https://user-images.githubusercontent.com/33767549/116946034-1c287100-ac47-11eb-8d42-c47713a8a719.gif)
 
