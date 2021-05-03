@@ -4,9 +4,9 @@ OSdash is an open-source project for visualizing the exploration and monitoring 
 ## Setup  
 * Install [python](https://www.python.org/) and [osquery](https://osquery.io/), then create accounts at [abuseipdb](https://www.abuseipdb.com/), [greynoise](https://developer.greynoise.io/docs/using-the-greynoise-community-api) and [maxmind](https://dev.maxmind.com/geoip/geoip2/geolite2/).  
 
-* Download this repo: ```curl ```
+* Download this repo: ```git clone  https://github.com/dpdug4n/os_dash```
 
-* ``cd directory``
+* ``cd os_dash``
 * ``pip install -r requirements.txt``
 
 * Download maxmind's geolite2-city database and save it in ```\assets```.
