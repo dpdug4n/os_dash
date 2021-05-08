@@ -11,115 +11,123 @@ def epoch_to_local(timestamp):
     except:
         return timestamp
 
+
 class remote_process_map():
-    def __init__(self, fig, qresults):
+    def __init__(self):#, fig, qresults):
+        pass
+        #self.fig = fig
+        #self.qresults = qresults
+    def gen_map(self, toggle_val=False):
+        host_queries.query(host_queries.book['remoteProcessConnections'])
+        #GeoIP Lookup
+        #This product includes GeoLite2 data created by MaxMind, available from
+        #<a href="https://www.maxmind.com">https://www.maxmind.com</a>.
+        try:
+            utils.geoIP(host_queries.queryresults.remote_address.to_list())
+            qresults = host_queries.queryresults.assign(Latitude = utils.rIPlat, Longitude = utils.rIPlon, srcLatitude = utils.srcIPlat, srcLongitude = utils.srcIPlon)
+        except Exception as e:
+            print(e)
+
+        #GreyNoise IP Check. Unlimited with account but less info.
+        if toggle_val is  False:
+            try:
+                utils.gnIPCheck(qresults.remote_address.to_list())
+                qresults = qresults.assign(Abuse_Rating= utils.rIPRating, Domain = utils.rIPDomain)
+            except Exception as e:
+                print(e)
+        # #AbuseIPDB check. Rate limited but more info/larger db. Should make toggle option in settings to switch between these
+        if toggle_val is True:
+            try:
+                utils.abuseIPCheck(qresults.remote_address.to_list())
+                qresults = qresults.assign(Abuse_Rating= utils.rIPRating, Domain = utils.rIPDomain)
+            except Exception as e:
+                print(e)
+
+        
+        fig = go.FigureWidget()
+        
+        #add lines from src to dst
+        for i in range(len(qresults)):
+            if qresults['Abuse_Rating'][i] == 'High':
+                fig.add_trace(
+                    go.Scattergeo(
+                        name = qresults['name'][i],
+                        lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
+                        lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
+                        mode = 'lines',
+                        line = dict(width = 2, color = 'red'),
+                        opacity = 0.45,
+                        showlegend = False
+                    )
+                )
+            if qresults['Abuse_Rating'][i] == 'Medium':
+                fig.add_trace(
+                    go.Scattergeo(
+                        name = qresults['name'][i],
+                        lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
+                        lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
+                        mode = 'lines',
+                        line = dict(width = 2, color = 'yellow'),
+                        opacity = 0.45,
+                        showlegend = False
+                    )
+                )
+            if qresults['Abuse_Rating'][i] == 'Low':
+                fig.add_trace(
+                    go.Scattergeo(
+                        name = qresults['name'][i],
+                        lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
+                        lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
+                        mode = 'lines',
+                        line = dict(width = 2, color = 'green'),
+                        opacity = 0.45,
+                        showlegend = False
+                    )
+                )
+            if qresults['Abuse_Rating'][i] == 'unknown':
+                fig.add_trace(
+                    go.Scattergeo(
+                        name = qresults['name'][i],
+                        lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
+                        lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
+                        mode = 'lines',
+                        line = dict(width = 2, color = 'grey'),
+                        opacity = 0.45,
+                        showlegend = False
+                    )
+                )
+        #plot src & dst
+        for i in range(len(qresults)):
+            fig.add_trace(
+                go.Scattergeo(
+                    name = qresults['name'][i],
+                    lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
+                    lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
+                    hoverinfo = 'text',
+                    text = str("Process : "+ qresults['name'][i] +"<br>ProcessID: "+ qresults['pid'][i] +"<br>Local Port: "+qresults['local_port'][i] +"<br>Domain: "+ qresults['Domain'][i] +"<br>RemoteAddress: "+ qresults['remote_address'][i] +"<br>RemotePort: "+ qresults['remote_port'][i]),
+                    mode = 'markers',
+                    marker = dict(size = 10, color = 'blue', opacity = 0.5)
+                )
+            )
+        #update layout for styling
+        fig.update_geos(
+            resolution=50,
+            showcountries=True, countrycolor='rgb(18, 242, 246)',
+            landcolor ='rgb(0, 9, 9)', lakecolor = 'rgb(10, 9, 87)',
+            showocean = True, oceancolor = 'rgb(10, 9, 87)',
+            showcoastlines=True, coastlinecolor='rgb(18, 242, 246)'
+        )
+        fig.update_layout(
+            title_text = 'Host Network Connections',
+            height = 500, width = 1000,
+            margin={"t":0,"b":0,"l":0, "r":0, "pad":0},
+            showlegend=True,
+            geo= dict(projection_type = 'equirectangular', showland = True),
+            clickmode='event+select'
+        )
         self.fig = fig
         self.qresults = qresults
-
-    host_queries.query(host_queries.book['remoteProcessConnections'])
-
-    #GeoIP Lookup
-    #This product includes GeoLite2 data created by MaxMind, available from
-    #<a href="https://www.maxmind.com">https://www.maxmind.com</a>.
-    try:
-        utils.geoIP(host_queries.queryresults.remote_address.to_list())
-        qresults = host_queries.queryresults.assign(Latitude = utils.rIPlat, Longitude = utils.rIPlon, srcLatitude = utils.srcIPlat, srcLongitude = utils.srcIPlon)
-    except Exception as e:
-        print(e)
-
-    # #AbuseIPDB check. Rate limited but more info/larger db. Should make toggle option in settings to switch between these
-    # try:
-    #     utils.abuseIPCheck(qresults.remote_address.to_list())
-    #     qresults = qresults.assign(Abuse_Rating= utils.rIPRating, Domain = utils.rIPDomain)
-    # except Exception as e:
-    #     print(e)
-
-    #GreyNoise IP Check. Unlimited with account but less info.
-    try:
-        utils.gnIPCheck(qresults.remote_address.to_list())
-        qresults = qresults.assign(Abuse_Rating= utils.rIPRating, Domain = utils.rIPDomain)
-    except Exception as e:
-        print(e)
-    fig = go.FigureWidget()
-    
-    #add lines from src to dst
-    for i in range(len(qresults)):
-        if qresults['Abuse_Rating'][i] == 'High':
-            fig.add_trace(
-                go.Scattergeo(
-                    name = qresults['name'][i],
-                    lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
-                    lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
-                    mode = 'lines',
-                    line = dict(width = 2, color = 'red'),
-                    opacity = 0.45,
-                    showlegend = False
-                )
-            )
-        if qresults['Abuse_Rating'][i] == 'Medium':
-            fig.add_trace(
-                go.Scattergeo(
-                    name = qresults['name'][i],
-                    lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
-                    lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
-                    mode = 'lines',
-                    line = dict(width = 2, color = 'yellow'),
-                    opacity = 0.45,
-                    showlegend = False
-                )
-            )
-        if qresults['Abuse_Rating'][i] == 'Low':
-            fig.add_trace(
-                go.Scattergeo(
-                    name = qresults['name'][i],
-                    lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
-                    lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
-                    mode = 'lines',
-                    line = dict(width = 2, color = 'green'),
-                    opacity = 0.45,
-                    showlegend = False
-                )
-            )
-        if qresults['Abuse_Rating'][i] == 'unknown':
-            fig.add_trace(
-                go.Scattergeo(
-                    name = qresults['name'][i],
-                    lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
-                    lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
-                    mode = 'lines',
-                    line = dict(width = 2, color = 'grey'),
-                    opacity = 0.45,
-                    showlegend = False
-                )
-            )
-    #plot src & dst
-    for i in range(len(qresults)):
-        fig.add_trace(
-            go.Scattergeo(
-                name = qresults['name'][i],
-                lat = (qresults['srcLatitude'][i], qresults['Latitude'][i]),
-                lon = (qresults['srcLongitude'][i], qresults['Longitude'][i]),
-                hoverinfo = 'text',
-                text = str("Process : "+ qresults['name'][i] +"<br>ProcessID: "+ qresults['pid'][i] +"<br>Local Port: "+qresults['local_port'][i] +"<br>Domain: "+ qresults['Domain'][i] +"<br>RemoteAddress: "+ qresults['remote_address'][i] +"<br>RemotePort: "+ qresults['remote_port'][i]),
-                mode = 'markers',
-                marker = dict(size = 10, color = 'blue', opacity = 0.5)
-            )
-        )
-    #update layout for styling
-    fig.update_geos(
-        resolution=50,
-        showcountries=True, countrycolor='rgb(18, 242, 246)',
-        landcolor ='rgb(0, 9, 9)', lakecolor = 'rgb(10, 9, 87)',
-        showocean = True, oceancolor = 'rgb(10, 9, 87)',
-        showcoastlines=True, coastlinecolor='rgb(18, 242, 246)'
-    )
-    fig.update_layout(
-        title_text = 'Host Network Connections',
-        height = 500, width = 1000,
-        margin={"t":0,"b":0,"l":0, "r":0, "pad":0},
-        showlegend=True,
-        geo= dict(projection_type = 'equirectangular', showland = True)
-    )
+        return self.fig, self.qresults
 
 class running_processes():
     def __init__(self, fig, qresults):
