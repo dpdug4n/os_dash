@@ -1,0 +1,480 @@
+{
+    "appcompat_shims": [
+        "executable",
+        "path",
+        "description",
+        "install_time",
+        "type",
+        "sdb_id"
+    ],
+    "authenticode": [
+        "path",
+        "original_program_name",
+        "serial_number",
+        "issuer_name",
+        "subject_name",
+        "result"
+    ],
+    "autoexec": [
+        "path",
+        "name",
+        "source"
+    ],
+    "background_activities_moderator": [
+        "path",
+        "last_execution_time",
+        "sid"
+    ],
+    "bitlocker_info": [
+        "device_id",
+        "drive_letter",
+        "persistent_volume_id",
+        "conversion_status",
+        "protection_status",
+        "encryption_method",
+        "version",
+        "percentage_encrypted",
+        "lock_status"
+    ],
+    "chassis_info": [
+        "audible_alarm",
+        "breach_description",
+        "chassis_types",
+        "description",
+        "lock",
+        "manufacturer",
+        "model",
+        "security_breach",
+        "serial",
+        "smbios_tag",
+        "sku",
+        "status",
+        "visible_alarm"
+    ],
+    "chocolatey_packages": [
+        "name",
+        "version",
+        "summary",
+        "author",
+        "license",
+        "path"
+    ],
+    "connectivity": [
+        "disconnected",
+        "ipv4_no_traffic",
+        "ipv6_no_traffic",
+        "ipv4_subnet",
+        "ipv4_local_network",
+        "ipv4_internet",
+        "ipv6_subnet",
+        "ipv6_local_network",
+        "ipv6_internet"
+    ],
+    "cpu_info": [
+        "device_id",
+        "model",
+        "manufacturer",
+        "processor_type",
+        "availability",
+        "cpu_status",
+        "number_of_cores",
+        "logical_processors",
+        "address_width",
+        "current_clock_speed",
+        "max_clock_speed",
+        "socket_designation"
+    ],
+    "default_environment": [
+        "variable",
+        "value",
+        "expand"
+    ],
+    "disk_info": [
+        "partitions",
+        "disk_index",
+        "type",
+        "id",
+        "pnp_device_id",
+        "disk_size",
+        "manufacturer",
+        "hardware_model",
+        "name",
+        "serial",
+        "description"
+    ],
+    "dns_cache": [
+        "name",
+        "type",
+        "flags"
+    ],
+    "drivers": [
+        "device_id",
+        "device_name",
+        "image",
+        "description",
+        "service",
+        "service_key",
+        "version",
+        "inf",
+        "class",
+        "provider",
+        "manufacturer",
+        "driver_key",
+        "date",
+        "signed"
+    ],
+    "hvci_status": [
+        "version",
+        "instance_identifier",
+        "vbs_status",
+        "code_integrity_policy_enforcement_status",
+        "umci_policy_status"
+    ],
+    "ie_extensions": [
+        "name",
+        "registry_path",
+        "version",
+        "path"
+    ],
+    "kva_speculative_info": [
+        "kva_shadow_enabled",
+        "kva_shadow_user_global",
+        "kva_shadow_pcid",
+        "kva_shadow_inv_pcid",
+        "bp_mitigations",
+        "bp_system_pol_disabled",
+        "bp_microcode_disabled",
+        "cpu_spec_ctrl_supported",
+        "ibrs_support_enabled",
+        "stibp_support_enabled",
+        "cpu_pred_cmd_supported"
+    ],
+    "logical_drives": [
+        "device_id",
+        "type",
+        "description",
+        "free_space",
+        "size",
+        "file_system",
+        "boot_partition"
+    ],
+    "logon_sessions": [
+        "logon_id",
+        "user",
+        "logon_domain",
+        "authentication_package",
+        "logon_type",
+        "session_id",
+        "logon_sid",
+        "logon_time",
+        "logon_server",
+        "dns_domain_name",
+        "upn",
+        "logon_script",
+        "profile_path",
+        "home_directory",
+        "home_directory_drive"
+    ],
+    "ntdomains": [
+        "name",
+        "client_site_name",
+        "dc_site_name",
+        "dns_forest_name",
+        "domain_controller_address",
+        "domain_controller_name",
+        "domain_name",
+        "status"
+    ],
+    "ntfs_acl_permissions": [
+        "path",
+        "type",
+        "principal",
+        "access",
+        "inherited_from"
+    ],
+    "ntfs_journal_events": [
+        "action",
+        "category",
+        "old_path",
+        "path",
+        "record_timestamp",
+        "record_usn",
+        "node_ref_number",
+        "parent_ref_number",
+        "drive_letter",
+        "file_attributes",
+        "partial",
+        "time",
+        "eid"
+    ],
+    "office_mru": [
+        "application",
+        "version",
+        "path",
+        "last_opened_time",
+        "sid"
+    ],
+    "patches": [
+        "csname",
+        "hotfix_id",
+        "caption",
+        "description",
+        "fix_comments",
+        "installed_by",
+        "install_date",
+        "installed_on"
+    ],
+    "physical_disk_performance": [
+        "name",
+        "avg_disk_bytes_per_read",
+        "avg_disk_bytes_per_write",
+        "avg_disk_read_queue_length",
+        "avg_disk_write_queue_length",
+        "avg_disk_sec_per_read",
+        "avg_disk_sec_per_write",
+        "current_disk_queue_length",
+        "percent_disk_read_time",
+        "percent_disk_write_time",
+        "percent_disk_time",
+        "percent_idle_time"
+    ],
+    "pipes": [
+        "pid",
+        "name",
+        "instances",
+        "max_instances",
+        "flags"
+    ],
+    "powershell_events": [
+        "time",
+        "datetime",
+        "script_block_id",
+        "script_block_count",
+        "script_text",
+        "script_name",
+        "script_path",
+        "cosine_similarity"
+    ],
+    "programs, aliases=[programs_and_features]": [
+        "name",
+        "version",
+        "install_location",
+        "install_source",
+        "language",
+        "publisher",
+        "uninstall_string",
+        "install_date",
+        "identifying_number"
+    ],
+    "registry": [
+        "key",
+        "path",
+        "name",
+        "type",
+        "data",
+        "mtime"
+    ],
+    "scheduled_tasks": [
+        "name",
+        "action",
+        "path",
+        "enabled",
+        "state",
+        "hidden",
+        "last_run_time",
+        "next_run_time",
+        "last_run_message",
+        "last_run_code"
+    ],
+    "services": [
+        "name",
+        "service_type",
+        "display_name",
+        "status",
+        "pid",
+        "start_type",
+        "win32_exit_code",
+        "service_exit_code",
+        "path",
+        "module_path",
+        "description",
+        "user_account"
+    ],
+    "shared_resources": [
+        "description",
+        "install_date",
+        "status",
+        "allow_maximum",
+        "maximum_allowed",
+        "name",
+        "path",
+        "type"
+    ],
+    "shellbags": [
+        "sid",
+        "source",
+        "path",
+        "modified_time",
+        "created_time",
+        "accessed_time",
+        "mft_entry",
+        "mft_sequence"
+    ],
+    "shimcache": [
+        "entry",
+        "path",
+        "modified_time",
+        "execution_flag"
+    ],
+    "shortcut_files": [
+        "path",
+        "target_path",
+        "target_modified",
+        "target_created",
+        "target_accessed",
+        "target_size",
+        "relative_path",
+        "local_path",
+        "working_path",
+        "icon_path",
+        "common_path",
+        "command_args",
+        "hostname",
+        "share_name",
+        "device_type",
+        "volume_serial",
+        "mft_entry",
+        "mft_sequence",
+        "description"
+    ],
+    "userassist": [
+        "path",
+        "last_execution_time",
+        "count",
+        "sid"
+    ],
+    "video_info": [
+        "color_depth",
+        "driver",
+        "driver_date",
+        "driver_version",
+        "manufacturer",
+        "model",
+        "series",
+        "video_mode"
+    ],
+    "winbaseobj": [
+        "session_id",
+        "object_name",
+        "object_type"
+    ],
+    "windows_crashes": [
+        "datetime",
+        "module",
+        "path",
+        "pid",
+        "tid",
+        "version",
+        "process_uptime",
+        "stack_trace",
+        "exception_code",
+        "exception_message",
+        "exception_address",
+        "registers",
+        "command_line",
+        "current_directory",
+        "username",
+        "machine_name",
+        "major_version",
+        "minor_version",
+        "build_number",
+        "type",
+        "crash_path"
+    ],
+    "windows_eventlog": [
+        "channel",
+        "datetime",
+        "task",
+        "level",
+        "provider_name",
+        "provider_guid",
+        "computer_name",
+        "eventid",
+        "keywords",
+        "data",
+        "pid",
+        "tid",
+        "time_range",
+        "timestamp",
+        "xpath"
+    ],
+    "windows_events": [
+        "time",
+        "datetime",
+        "source",
+        "provider_name",
+        "provider_guid",
+        "computer_name",
+        "eventid",
+        "task",
+        "level",
+        "keywords",
+        "data",
+        "eid"
+    ],
+    "windows_optional_features": [
+        "name",
+        "caption",
+        "state",
+        "statename"
+    ],
+    "windows_security_center": [
+        "firewall",
+        "autoupdate",
+        "antivirus",
+        "antispyware",
+        "internet_settings",
+        "windows_security_center_service",
+        "user_account_control"
+    ],
+    "windows_security_products": [
+        "type",
+        "name",
+        "state",
+        "state_timestamp",
+        "remediation_path",
+        "signatures_up_to_date"
+    ],
+    "wmi_bios_info": [
+        "name",
+        "value"
+    ],
+    "wmi_cli_event_consumers": [
+        "name",
+        "command_line_template",
+        "executable_path",
+        "class",
+        "relative_path"
+    ],
+    "wmi_event_filters": [
+        "name",
+        "query",
+        "query_language",
+        "class",
+        "relative_path"
+    ],
+    "wmi_filter_consumer_binding": [
+        "consumer",
+        "filter",
+        "class",
+        "relative_path"
+    ],
+    "wmi_script_event_consumers": [
+        "name",
+        "scripting_engine",
+        "script_file_name",
+        "script_text",
+        "class",
+        "relative_path"
+    ]
+}
