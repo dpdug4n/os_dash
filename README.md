@@ -21,5 +21,6 @@ Create two new user variables named ``abuseipdb_key`` and ``greynoise_key`` with
 * Navigate [here](http://127.0.0.1:8050/home) in your preferred browser.
 
 # Demo
-![Demo](https://user-images.githubusercontent.com/33767549/116946034-1c287100-ac47-11eb-8d42-c47713a8a719.gif)
+![Demo](https://user-images.githubusercontent.com/33767549/119290788-3b4d6980-bc1b-11eb-95fd-00bd9930eae6.gif)
+
 
