@@ -66,6 +66,25 @@ body = dbc.Container(
             ),
             form = True,
         ),
+        dbc.Row(
+            dbc.Col(
+                dbc.FormGroup(
+                    [
+                        dbc.Label("Theme:", html_for="theme"),
+                        dcc.Dropdown(
+                            id = 'themes',
+                            options=[{'label': theme , 'value': theme} for theme in dir(dbc.themes) if not theme.startswith('__')],
+                            value = 'MATERIA',
+                            clearable=False,
+                        ),
+                        
+                    ]
+                ),
+            ),
+            form = True,
+        ),
+        html.Div(id='placeholder', style={'display':'none'})
+
 
     ]
 )
@@ -73,7 +92,8 @@ body = dbc.Container(
 
 layout = html.Div([
     nav,
-    body
+    body,
+    
 ])
 
 @app.callback(
@@ -101,3 +121,21 @@ def on_button_click(n,osq,gl2,ak,gk):
         os.environ['greynoise_key'] = gk        
     return n, osq, gl2, ak, gk
     #need to switch this to config file, or use subprocess to updated registry keys. Former is preferred, latter is unsafe.
+
+app.clientside_callback(
+    #https://community.plotly.com/t/dash-bootstrap-theme-switcher/50798/2
+    """
+    function(theme) {
+        var stylesheet = document.querySelector('link[rel=stylesheet][href^="https://stackpath"]')
+        var name = theme.toLowerCase()
+        if (name === 'bootstrap') {
+            var link = 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'
+          } else {
+            var link = "https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/" + name + "/bootstrap.min.css"
+        }
+        stylesheet.href = link
+    }
+    """,
+    Output("placeholder", "children"),
+    Input("themes", "value"),
+)

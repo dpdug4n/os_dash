@@ -36,7 +36,7 @@ body = dbc.Container([
             style={'width':'100%', 'height':'200'},
             value="SELECT {columns} FROM {table}"
         ),
-    html.Button('Ask your OS.', id='query_submit'),#add a link to scheme on far right column
+    html.Button('Ask your OS.', id='query_submit'),#add a link to schema on far right column?
     html.Div(id='query_table_container')]
     ))),
 ])
@@ -56,8 +56,7 @@ def set_columns_dropdown(selected_table):
     [Input('table-dropdown','value'),
     Input('table-columns-dropdown', 'value'),
     State('query_input', 'value')])
-def build_query(table, columns, current_input):
-    #need to rethink this. won't update after first replace. 
+def build_query(table, columns, current_input): 
     if table is None:
         return dash.no_update
     else:

@@ -54,7 +54,7 @@ body = dbc.Container([
     ]),
     dbc.Row([
         dbc.Col(html.Div([
-            html.H5("Process Tree Table"),
+            html.H5("Process Tree"),
             dash_table.DataTable(
                 id='running_process_pidtreetable',
                 columns=[{"name": n, "id": x} for n,x in zip(pid_tree_ColNames,pid_tree_df.columns)],
