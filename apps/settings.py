@@ -26,6 +26,22 @@ body = dbc.Container(
             dbc.Col(
                 dbc.FormGroup(
                     [
+                        dbc.Label("OS Type:", html_for="os_type"),
+                        dcc.Dropdown(
+                            id='os_type',
+                            options = [{'label': os , 'value': os} for os in ['Windows', 'macOS','Linux']],
+                            value = 'Windows',
+                            clearable=False,
+                        )
+                    ]
+                ),
+            ),
+            form = True
+        ),
+        dbc.Row(
+            dbc.Col(
+                dbc.FormGroup(
+                    [
                         dbc.Label("OSquery Socket:", html_for="osquery_socket"),
                         dbc.Input(id="osquery_socket", placeholder=os.getenv('osquery_socket','C:/Program Files/osquery/osqueryd/osqueryd.exe')),
                     ]
@@ -70,7 +86,7 @@ body = dbc.Container(
             dbc.Col(
                 dbc.FormGroup(
                     [
-                        dbc.Label("Theme:", html_for="theme"),
+                        dbc.Label("Theme:", html_for="themes"),
                         dcc.Dropdown(
                             id = 'themes',
                             options=[{'label': theme , 'value': theme} for theme in dir(dbc.themes) if not theme.startswith('__')],
@@ -97,7 +113,7 @@ layout = html.Div([
 ])
 
 @app.callback(
-    [Output("save_output", "children"),
+    [#Output("save_output", "children"),
     Output("osquery_socket", "value"),
     Output("gl2cdb", "value"),
     Output("abuseipdb_key", "value"),
@@ -119,8 +135,8 @@ def on_button_click(n,osq,gl2,ak,gk):
         os.environ['abuseipdb_key'] = ak
     elif gk is not None:
         os.environ['greynoise_key'] = gk        
-    return n, osq, gl2, ak, gk
-    #need to switch this to config file, or use subprocess to updated registry keys. Former is preferred, latter is unsafe.
+    return osq, gl2, ak, gk
+    #need to switch this to config file
 
 app.clientside_callback(
     #https://community.plotly.com/t/dash-bootstrap-theme-switcher/50798/2

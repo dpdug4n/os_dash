@@ -15,8 +15,9 @@ class host_queries():
             'autoexec':'SELECT * FROM autoexec',
             'chrome_extensions':'SELECT u.username, extensions.name, extensions.identifier,extensions.version,extensions.permissions,extensions.optional_permissions FROM users u CROSS JOIN chrome_extensions extensions USING (uid)',
             'firefox_addons':'SELECT u.username, extensions.name, extensions.identifier,extensions.version,extensions.description,extensions.source_url FROM users u CROSS JOIN firefox_addons extensions USING (uid)'
-        }
-        
+        }        
+    macBook={}
+    linuxBook={}
     def query(q):
         #https://github.com/osquery/osquery-python/blob/master/examples/spawn.py
         INSTANCE = osquery.SpawnInstance(os.getenv('osquery_socket','C:/Program Files/osquery/osqueryd/osqueryd.exe'))
