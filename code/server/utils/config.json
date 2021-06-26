@@ -1,0 +1,9 @@
+{
+    "client_os":"Windows",
+    "client_address":"192.168.122.68",
+    "client_port": 6667,
+    "maxmind_geolite2_city_db":"assets/GeoLite2-City.mmdb",
+    "abuse_ipdb_api_key":"1234",
+    "grey_noise_api_key":"1234",
+    "theme":"MATERIA"
+}
