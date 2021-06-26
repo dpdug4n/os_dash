@@ -2,7 +2,7 @@
 OSdash is an open-source project for visualizing the exploration and monitoring of operating systems. Please note that this is not built for production environments and is for educational purposes. Use at your own risk.   
 
 ## Setup  
-<sub><sup>This is presuming the host & server are on the same local network. 
+<sub><sup>This is presuming the client & server are on the same local/virtual network. You can add ``"bridge": "bridge_name",`` to [/etc/docker/daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/) to change the default docker bridge.<sup></sub>
 ### Host 
 * Install [python](https://www.python.org/) and [osquery](https://osquery.io/) on the host to monitor, then create accounts at [abuseipdb](https://www.abuseipdb.com/), [greynoise](https://developer.greynoise.io/docs/using-the-greynoise-community-api) and [maxmind](https://dev.maxmind.com/geoip/geoip2/geolite2/).  
 
